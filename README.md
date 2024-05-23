@@ -2,7 +2,10 @@
 
 Magic Ball with predictions using API and Rive animation
 
----
+## Demo
+
+https://github.com/khlebobul/magic_ball/assets/77191581/8bd2057f-f78d-4ed7-8343-cf728fc417db
+
 ## Intro
 
 I've been wanting to try adding Rive animation to an app written in Flutter for a long time. What I need to do this:
