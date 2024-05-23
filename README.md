@@ -9,6 +9,7 @@ I've been wanting to try adding Rive animation to an app written in Flutter for 
 - Rive file: [Unlucky 8 ball - randomise feature](https://rive.app/community/files/9961-18989-unlucky-8-ball-randomise-feature/)
 - [8Ball API](https://www.eightballapi.com/docs)
 - [Rive package](https://pub.dev/packages/rive/install)
+- [http package](https://pub.dev/packages/http)
 
 Useful links:
 - [Flutter x Rive – create smooth Flutter animations](https://applover.com/blog/flutter-x-rive-create-smooth-flutter-animations/)
@@ -45,8 +46,6 @@ class MyRiveAnimation extends StatelessWidget {
 It's very simple! Now let's try to make our own Magic Ball app that will give predictions using API when you tap on the ball.
 
 You can find more Flutter examples [here](https://github.com/rive-app/rive-flutter/blob/master/example/lib/main.dart)
-
----
 
 ## Implementation
 
@@ -136,7 +135,41 @@ Our animation already has the `M01` text embedded in it, which is displayed by d
 Then let's add text in the center when you click on the ball.
 
 ```dart
-
+Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Center(
+            child: GestureDetector(
+              onTap: _onBallTapped,
+              child: RiveAnimation.asset(
+                'assets/magic_ball.riv',
+                fit: BoxFit.cover,
+                controllers: [_controller],
+              ),
+            ),
+          ),
+          if (_showText)
+            const Center(
+              child: Text(
+                'Active',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 ```
+
+It is also possible to add animation of text appearing smoothly. 
+
+#### 6. Add text predictions from the [API](https://www.eightballapi.com/docs)
+
+We will send the request using the [http package](https://pub.dev/packages/http)
 
 
