@@ -1,6 +1,16 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:magic_ball/api/api_client.dart';
 import 'package:rive/rive.dart';
+
+const String kIdleAnimation = 'Idle';
+const String kActiveAnimation = 'Screen on';
+const String kLoadingErrorText = 'Error fetching response';
+const double kTextFontSize = 24.0;
+const FontWeight kTextFontWeight = FontWeight.bold;
+const Color kTextColor = Colors.white;
+const Duration kOpacityAnimationDuration = Duration(milliseconds: 500);
+const Duration kTextDisplayDelay = Duration(milliseconds: 200);
 
 class MagicBallScreen extends StatefulWidget {
   const MagicBallScreen({super.key});
@@ -13,17 +23,19 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
   late RiveAnimationController _controller;
   String _responseText = '';
   bool _isLoading = false;
-  final ApiClient _apiClient = ApiClient(); // Инициализируем API клиент
+  bool _showText = false;
+  final ApiClient _apiClient = ApiClient();
 
   @override
   void initState() {
     super.initState();
-    _controller = SimpleAnimation('Idle');
+    _controller = SimpleAnimation(kIdleAnimation);
   }
 
   Future<void> _fetch8BallResponse() async {
     setState(() {
       _isLoading = true;
+      _showText = false;
     });
 
     try {
@@ -32,10 +44,17 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
         _responseText = responseText;
         _isLoading = false;
       });
+
+      Future.delayed(kTextDisplayDelay, () {
+        setState(() {
+          _showText = true;
+        });
+      });
     } catch (e) {
       setState(() {
-        _responseText = 'Error fetching response';
+        _responseText = kLoadingErrorText;
         _isLoading = false;
+        _showText = true;
       });
     }
   }
@@ -43,11 +62,12 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
   void _onBallTapped() {
     setState(() {
       if (_controller.isActive) {
-        _controller = SimpleAnimation('Screen on');
+        _controller = SimpleAnimation(kActiveAnimation);
         _fetch8BallResponse();
       } else {
-        _controller = SimpleAnimation('Idle');
+        _controller = SimpleAnimation(kIdleAnimation);
         _responseText = '';
+        _showText = false;
       }
     });
   }
@@ -67,20 +87,23 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
               ),
             ),
           ),
-          if (_responseText.isNotEmpty)
-            Center(
-              child: _isLoading
-                  ? const CircularProgressIndicator()
-                  : Text(
+          Center(
+            child: _isLoading
+                ? const CircularProgressIndicator()
+                : AnimatedOpacity(
+                    opacity: _showText ? 1.0 : 0.0,
+                    duration: kOpacityAnimationDuration,
+                    child: Text(
                       _responseText,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        fontSize: kTextFontSize,
+                        fontWeight: kTextFontWeight,
+                        color: kTextColor,
                       ),
                     ),
-            ),
+                  ),
+          ),
         ],
       ),
     );
