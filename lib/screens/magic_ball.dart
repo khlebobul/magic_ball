@@ -6,11 +6,11 @@ import 'package:rive/rive.dart';
 const String kIdleAnimation = 'Idle';
 const String kActiveAnimation = 'Screen on';
 const String kLoadingErrorText = 'Error fetching response';
-const double kTextFontSize = 24.0;
-const FontWeight kTextFontWeight = FontWeight.bold;
+const double kTextFontSize = 18.0;
 const Color kTextColor = Colors.white;
 const Duration kOpacityAnimationDuration = Duration(milliseconds: 500);
 const Duration kTextDisplayDelay = Duration(milliseconds: 200);
+const riveAnimationAssetPath = 'assets/magic_ball.riv';
 
 class MagicBallScreen extends StatefulWidget {
   const MagicBallScreen({super.key});
@@ -81,7 +81,7 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
             child: GestureDetector(
               onTap: _onBallTapped,
               child: RiveAnimation.asset(
-                'assets/magic_ball.riv',
+                riveAnimationAssetPath,
                 fit: BoxFit.cover,
                 controllers: [_controller],
               ),
@@ -98,7 +98,6 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: kTextFontSize,
-                        fontWeight: kTextFontWeight,
                         color: kTextColor,
                       ),
                     ),
