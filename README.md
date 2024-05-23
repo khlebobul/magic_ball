@@ -10,6 +10,13 @@ I've been wanting to try adding Rive animation to an app written in Flutter for 
 - [8Ball API](https://www.eightballapi.com/docs)
 - [Rive package](https://pub.dev/packages/rive/install)
 
+Useful links:
+- [Flutter x Rive – create smooth Flutter animations](https://applover.com/blog/flutter-x-rive-create-smooth-flutter-animations/)
+- [Rive animations in Flutter](https://www.geeksforgeeks.org/rive-animations-in-flutter/)
+- [Rive for Flutter Animations](https://medium.com/@RotenKiwi/rive-for-flutter-animations-a99bfdd8f6cc)
+
+---
+
 First, let's turn to the [Introduction page](https://help.rive.app/) and [Rive Flutter documentation](https://help.rive.app/runtimes/overview/flutter) and try to look at the basic code with the machine.
 
 ```dart
