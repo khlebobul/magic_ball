@@ -1,6 +1,6 @@
 # magic_ball
 
-Magic Ball with predictions using API
+Magic Ball with predictions using API and Rive animation
 
 ---
 ## Intro
@@ -42,7 +42,7 @@ class MyRiveAnimation extends StatelessWidget {
 }
 ```
 
-It's very simple! Now let's try to make our own Magic Ball app that will give predictions using API when you tap or shake your phone.
+It's very simple! Now let's try to make our own Magic Ball app that will give predictions using API when you tap on the ball.
 
 You can find more Flutter examples [here](https://github.com/rive-app/rive-flutter/blob/master/example/lib/main.dart)
 
@@ -107,7 +107,7 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
 
 In this StateMachine, you can define different animation states and their transitions. For each state, you can specify an animation to play.
 
-In our case, we need to add an action animation for clicking on the ball. To do this, we need to add an Indle action and Screen on with the message.
+In our case, we need to add an action animation for clicking on the ball. To do this, we need to add an `Indle` action and `Screen on` with the message.
 
 ```dart
 ///
@@ -128,3 +128,15 @@ In our case, we need to add an action animation for clicking on the ball. To do 
   }
 ///
 ```
+
+#### 5. Change text on the ball
+
+Our animation already has the `M01` text embedded in it, which is displayed by default. Honestly, I haven't figured out how to change the default text. Maybe someone can help me. Therefore, I propose to remove the message in the copy of our animation from block M01 and leave it without text. Let's do the new file export again.
+
+Then let's add text in the center when you click on the ball.
+
+```dart
+
+```
+
+

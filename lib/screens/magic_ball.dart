@@ -10,6 +10,7 @@ class MagicBallScreen extends StatefulWidget {
 
 class _MagicBallScreenState extends State<MagicBallScreen> {
   late RiveAnimationController _controller;
+  bool _showText = false;
 
   @override
   void initState() {
@@ -21,8 +22,10 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
     setState(() {
       if (_controller.isActive) {
         _controller = SimpleAnimation('Screen on');
+        _showText = true; // Show text when animation is active
       } else {
         _controller = SimpleAnimation('Idle');
+        _showText = false; // Hide text when animation is idle
       }
     });
   }
@@ -30,15 +33,30 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: GestureDetector(
-          onTap: _onBallTapped,
-          child: RiveAnimation.asset(
-            'assets/magic_ball.riv',
-            fit: BoxFit.cover,
-            controllers: [_controller],
+      body: Stack(
+        children: [
+          Center(
+            child: GestureDetector(
+              onTap: _onBallTapped,
+              child: RiveAnimation.asset(
+                'assets/magic_ball.riv',
+                fit: BoxFit.cover,
+                controllers: [_controller],
+              ),
+            ),
           ),
-        ),
+          if (_showText)
+            const Center(
+              child: Text(
+                'Active',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
