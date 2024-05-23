@@ -9,15 +9,43 @@ class MagicBallScreen extends StatefulWidget {
 }
 
 class _MagicBallScreenState extends State<MagicBallScreen> {
+  late RiveAnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = SimpleAnimation('Idle');
+  }
+
+  void _onBallTapped() {
+    setState(() {
+      if (_controller.isActive) {
+        _controller = SimpleAnimation('Screen on');
+      } else {
+        _controller = SimpleAnimation('Idle');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: RiveAnimation.asset(
-          'assets/magic_ball.riv',
-          fit: BoxFit.cover,
+        child: GestureDetector(
+          onTap: _onBallTapped,
+          child: RiveAnimation.asset(
+            'assets/magic_ball.riv',
+            fit: BoxFit.cover,
+            controllers: [_controller],
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

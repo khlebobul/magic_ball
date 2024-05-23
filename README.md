@@ -59,7 +59,7 @@ We will be using the file via assets, so we need to download the animation file.
 
 #### 2. In the window that opens, click on the drop-down menu and select export.
 
-We should end up with a .riv file and add it to our assets folder
+We should end up with a .riv file and add it to our assets folder. In the copy of my animation, I removed the default text.
 
 #### 3. Add our downloaded animation to the project
 
@@ -107,5 +107,24 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
 
 In this StateMachine, you can define different animation states and their transitions. For each state, you can specify an animation to play.
 
-In our case, we need to add an action animation for clicking on the ball.
+In our case, we need to add an action animation for clicking on the ball. To do this, we need to add an Indle action and Screen on with the message.
 
+```dart
+///
+  @override
+  void initState() {
+    super.initState();
+    _controller = SimpleAnimation('Idle');
+  }
+
+  void _onBallTapped() {
+    setState(() {
+      if (_controller.isActive) {
+        _controller = SimpleAnimation('Screen on');
+      } else {
+        _controller = SimpleAnimation('Idle');
+      }
+    });
+  }
+///
+```
