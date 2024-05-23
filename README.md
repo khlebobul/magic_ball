@@ -60,3 +60,52 @@ We will be using the file via assets, so we need to download the animation file.
 #### 2. In the window that opens, click on the drop-down menu and select export.
 
 We should end up with a .riv file and add it to our assets folder
+
+#### 3. Add our downloaded animation to the project
+
+main.dart
+```dart 
+import 'package:flutter/material.dart';
+import 'package:magic_ball/screens/magic_ball.dart';
+
+void main() => runApp(const MaterialApp(
+      home: MagicBallScreen(),
+      debugShowCheckedModeBanner: false,
+    ));
+
+```
+
+magic_ball.dart
+``` dart
+import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
+
+class MagicBallScreen extends StatefulWidget {
+  const MagicBallScreen({super.key});
+
+  @override
+  State<MagicBallScreen> createState() => _MagicBallScreenState();
+}
+
+class _MagicBallScreenState extends State<MagicBallScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: RiveAnimation.asset(
+          'assets/magic_ball.riv',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+#### 4. StateMachines (Add intelligence to your animations)
+
+In this StateMachine, you can define different animation states and their transitions. For each state, you can specify an animation to play.
+
+In our case, we need to add an action animation for clicking on the ball.
+
