@@ -4,7 +4,7 @@ Magic Ball with predictions using API and Rive animation
 
 ## Demo
 
-https://github.com/khlebobul/magic_ball/assets/77191581/8bd2057f-f78d-4ed7-8343-cf728fc417db
+![demo](rive_magic_ball_demo.mp4)
 
 ## Intro
 
