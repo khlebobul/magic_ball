@@ -38,25 +38,20 @@ class _MagicBallScreenState extends State<MagicBallScreen> {
       _showText = false;
     });
 
-    try {
-      final responseText = await _apiClient.fetch8BallResponse();
-      setState(() {
-        _responseText = responseText;
-        _isLoading = false;
-      });
+    final responseText = await _apiClient.fetch8BallResponse().catchError((error) {
+      return kLoadingErrorText;
+    });
 
-      Future.delayed(kTextDisplayDelay, () {
-        setState(() {
-          _showText = true;
-        });
-      });
-    } catch (e) {
+    setState(() {
+      _responseText = responseText;
+      _isLoading = false;
+    });
+
+    Future.delayed(kTextDisplayDelay, () {
       setState(() {
-        _responseText = kLoadingErrorText;
-        _isLoading = false;
         _showText = true;
       });
-    }
+    });
   }
 
   void _onBallTapped() {
