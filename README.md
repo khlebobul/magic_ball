@@ -18,6 +18,7 @@ Useful links:
 - [Flutter x Rive – create smooth Flutter animations](https://applover.com/blog/flutter-x-rive-create-smooth-flutter-animations/)
 - [Rive animations in Flutter](https://www.geeksforgeeks.org/rive-animations-in-flutter/)
 - [Rive for Flutter Animations](https://medium.com/@RotenKiwi/rive-for-flutter-animations-a99bfdd8f6cc)
+- [Awesome Rive](https://github.com/Roaa94/awesome-rive)
 
 ---
 
